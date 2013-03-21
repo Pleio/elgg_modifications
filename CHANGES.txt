@@ -1,0 +1,10 @@
+= Version History =
+
+2.0 (2012-07-12):
+
+- added: support for videolist widget
+- fixed: admin newest users widget
+
+2.0 beta(2012-05-14)
+
+- first release for Elgg 1.8
