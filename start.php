@@ -14,10 +14,6 @@
 		elgg_register_page_handler("accept_terms", "elgg_modifications_accept_terms_page_handler");
 		elgg_register_page_handler("generate_digischool_menu", "elgg_modifications_generate_digischool_menu_page_handler");
 		
-		elgg_register_simplecache_view("js/languages/nl");
-		
-		// register widget
-		elgg_register_widget_type("register", elgg_echo("register"),  elgg_echo("register") ,"index");
 		elgg_register_widget_type("pdokkaart", elgg_echo("widgets:pdokkaart:title"),  elgg_echo("widgets:pdokkaart:description") ,"index,groups,profile,dashboard", true);
 		
 		elgg_unregister_plugin_hook_handler('object:notifications', 'object', 'group_object_notifications_intercept'); // disable intercept
@@ -84,7 +80,6 @@
 	// register plugin hooks
 	elgg_register_plugin_hook_handler("reportedcontent:add", "system", "elgg_modifications_reportedcontent_hook");
 	elgg_register_plugin_hook_handler("gatekeeper", "group", "elgg_modifications_group_gatekeeper_hook");
-	elgg_register_plugin_hook_handler("route", "file", "elgg_modifications_route_file_hook");
 	elgg_register_plugin_hook_handler("widget_url", "widget_manager", "elgg_modifications_widgets_url_hook");
 	
 	// register actions

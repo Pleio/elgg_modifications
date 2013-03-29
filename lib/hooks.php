@@ -55,6 +55,7 @@
 	
 	function elgg_modifications_group_gatekeeper_hook($hook, $type, $return_value, $params){
 		$result = $return_value;
+		// @todo needs a fresh look after 1.8.14
 		
 		if(!empty($params) && is_array($params)){
 			$group = elgg_extract("group", $params);
@@ -75,19 +76,7 @@
 		
 		return $result;
 	}
-	
-	/* fixes old (pre 1.8) file read links */
-	function elgg_modifications_route_file_hook($hook, $type, $return_value, $params){
-		if($return_value["handler"] == "file"){
-			$page = $return_value["segments"];
-			if($page[0] == "read"){
-				$page[0] = "view";
-				$return_value["segments"] = $page;
-				return $return_value;
-			}
-		}
-	}
-	
+		
 	function elgg_modifications_widgets_url_hook($hook, $type, $return_value, $params){
 		$result = $return_value;
 		
