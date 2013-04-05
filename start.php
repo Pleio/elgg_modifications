@@ -19,6 +19,10 @@
 		elgg_unregister_plugin_hook_handler('object:notifications', 'object', 'group_object_notifications_intercept'); // disable intercept
 		elgg_unregister_plugin_hook_handler('notify:entity:message', 'object', 'groupforumtopic_notify_message'); // unregister default message
 		elgg_register_plugin_hook_handler('notify:entity:message', 'object', 'elgg_modifications_groupforumtopic_notify_message'); // register new message
+		
+		// allow tidypics widgets on group and index page
+		elgg_register_widget_type('album_view', elgg_echo("tidypics:widget:albums"), elgg_echo("tidypics:widget:album_descr"), 'profile,index,groups');
+		elgg_register_widget_type('latest_photos', elgg_echo("tidypics:widget:latest"), elgg_echo("tidypics:widget:latest_descr"), 'profile,index,groups');
 	}
 	
 	/**
