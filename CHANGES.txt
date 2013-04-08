@@ -1,4 +1,7 @@
 = Version History =
+x.x:
+- fixed: PHP errors on old function for videolist dimensions
+
 2.1 (2013-04-05):
 - changed: made compatible with Elgg 1.8.14
 
