@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 	require_once(dirname(__FILE__) . "/lib/hooks.php");
 	require_once(dirname(__FILE__) . "/lib/page_handlers.php");
@@ -8,7 +8,7 @@
 		elgg_extend_view("css/elgg", "elgg_modifications/css/site");
 		
 		// prepend / extend views
-		elgg_extend_view("forms/uservalidationbyemail/bulk_action", "elgg_modifications/extends/userbalicationbyemail/bulk_action", 499);
+		elgg_extend_view("forms/uservalidationbyemail/bulk_action", "elgg_modifications/extends/uservalidationbyemail/bulk_action", 499);
 
 		// register page handler
 		elgg_register_page_handler("accept_terms", "elgg_modifications_accept_terms_page_handler");
@@ -27,7 +27,7 @@
 	
 	/**
 	 * Extend the registered widgets to more contexts
-	 * 
+	 *
 	 */
 	function elgg_modifications_init_extend_widgets(){
 		global $CONFIG;

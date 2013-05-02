@@ -3,6 +3,7 @@ x.x:
 - fixed: PHP errors on old function for videolist dimensions
 - fixed: PHP error in pages history annotation
 - fixed: invalid function call in Tidypics ablum view
+- fixed: wrong extend for uservalidationbyemail
 
 2.1 (2013-04-05):
 - changed: made compatible with Elgg 1.8.14
