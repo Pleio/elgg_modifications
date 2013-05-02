@@ -42,7 +42,7 @@
 				if(!empty($filtered_users)){
 					$subject = elgg_echo("elgg_modifications:usersettings:reportedcontent:notify:subject");
 					$message = elgg_echo("elgg_modifications:usersettings:reportedcontent:notify:message", array(
-											$report->getOwnerEntity()->name, 
+											$report->getOwnerEntity()->name,
 											$site->url . "admin/administer_utilities/reportedcontent"));
 						
 					foreach($filtered_users as $user){
@@ -102,65 +102,92 @@
 	/**
 	* Returns a more meaningful message
 	*
-	* @param unknown_type $hook
-	* @param unknown_type $entity_type
-	* @param unknown_type $returnvalue
-	* @param unknown_type $params
+	* @param string $hook
+	* @param string $entity_type
+	* @param null | string $returnvalue
+	* @param array $params
 	*/
 	function elgg_modifications_groupforumtopic_notify_message($hook, $entity_type, $returnvalue, $params) {
-		$entity = false;
-		$annotation = get_input("group_topic_post");
+		
+		if (!empty($params) && is_array($params)) {
+			// discussion create
+			$entity = elgg_extract("entity", $params);
+		
+			if (!empty($entity) && elgg_instanceof($entity, "object", "groupforumtopic")) {
+				$owner = $entity->getOwnerEntity();
+				$group = $entity->getContainerEntity();
+		
+				$tags = "";
+				if ($entity_tags = $entity->tags) {
+					if (!is_array($entity_tags)) {
+						$entity_tags = array($entity_tags);
+					}
+		
+					$tags = elgg_echo("tags") . ": " . implode(", ", $entity_tags) . PHP_EOL;
+				}
+				
+				// discussion create
+				return elgg_echo("elgg_modifications:groups:notification:create", array(
+					$owner->name,
+					$entity->title,
+					$group->name,
+					$tags,
+					elgg_get_excerpt($entity->description),
+					$entity->getURL()
+				));
+			}
+		}
+		
+		return null;
+	}
 	
-		// discussion create
-		$entity = $params['entity'];
-	
-		if (($entity instanceof ElggEntity) && ($entity->getSubtype() == 'groupforumtopic')) {
-			$descr = get_input("group_topic_post", $entity->description);
-			$title = $entity->title;
-			$url = $entity->getURL();
+	/**
+	 * Returns a more meaningful message
+	 *
+	 * @param string $hook
+	 * @param string $entity_type
+	 * @param null | string $returnvalue
+	 * @param array $params
+	 */
+	function elgg_modifications_groupforumtopic_reply_message($hook, $entity_type, $returnvalue, $params) {
+		
+		if (!empty($params) && is_array($params)) {
+			$annotation = elgg_extract("annotation", $params);
+			
+			// get some related entities
+			$entity = $annotation->getEntity();
 			$owner = $entity->getOwnerEntity();
 			$group = $entity->getContainerEntity();
-	
+			
+			// prepare different message parts
 			$tags = "";
-			if($entity_tags = $entity->tags){
-				if(!is_array($entity_tags)){
+			if ($entity_tags = $entity->tags) {
+				if (!is_array($entity_tags)) {
 					$entity_tags = array($entity_tags);
 				}
-	
+			
 				$tags = elgg_echo("tags") . ": " . implode(", ", $entity_tags) . PHP_EOL;
 			}
-				
-			if(!empty($annotation)){
-				// reply
-				$subtitle = elgg_echo("elgg_modifications:groups:notification:created_by", array($owner->name));
-	
-				if($count = $entity->countAnnotations("group_topic_post")){
-					$subtitle .= " - " . elgg_echo("comments:count", array($count));
-				}
-	
-				$subtitle .= PHP_EOL;
-				$subtitle .= $tags;
-	
-				$return = elgg_echo('elgg_modifications:groups:notification:reply', array(
+			
+			$subtitle = elgg_echo("elgg_modifications:groups:notification:created_by", array($owner->name));
+			
+			if ($count = $entity->countAnnotations("group_topic_post")) {
+				$subtitle .= " - " . elgg_echo("comments:count", array($count));
+			}
+			
+			$subtitle .= PHP_EOL;
+			$subtitle .= $tags;
+			
+			return elgg_echo("elgg_modifications:groups:notification:reply", array(
 				elgg_get_logged_in_user_entity()->name,
 				$entity->title,
 				$group->name,
 				$subtitle,
-				elgg_get_excerpt($annotation),
+				elgg_get_excerpt($annotation->value),
 				$entity->getURL()
-				));
-			} else {
-				// discussion create
-				$return = elgg_echo('elgg_modifications:groups:notification:create', array(
-				$owner->name,
-				$entity->title,
-				$group->name,
-				$tags,
-				elgg_get_excerpt($entity->description),
-				$entity->getURL()
-				));
-			}
-			return $return;
+			));
 		}
+		
 		return null;
 	}
+	

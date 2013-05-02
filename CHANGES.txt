@@ -4,6 +4,7 @@ x.x:
 - fixed: PHP error in pages history annotation
 - fixed: invalid function call in Tidypics ablum view
 - fixed: wrong extend for uservalidationbyemail
+- fixed: custom message for group forum discussions reply
 
 2.1 (2013-04-05):
 - changed: made compatible with Elgg 1.8.14

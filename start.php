@@ -16,9 +16,11 @@
 		
 		elgg_register_widget_type("pdokkaart", elgg_echo("widgets:pdokkaart:title"),  elgg_echo("widgets:pdokkaart:description") ,"index,groups,profile,dashboard", true);
 		
-		elgg_unregister_plugin_hook_handler('object:notifications', 'object', 'group_object_notifications_intercept'); // disable intercept
-		elgg_unregister_plugin_hook_handler('notify:entity:message', 'object', 'groupforumtopic_notify_message'); // unregister default message
-		elgg_register_plugin_hook_handler('notify:entity:message', 'object', 'elgg_modifications_groupforumtopic_notify_message'); // register new message
+		elgg_unregister_plugin_hook_handler("object:notifications", "object", "group_object_notifications_intercept"); // disable intercept
+		elgg_unregister_plugin_hook_handler("notify:entity:message", "object", "groupforumtopic_notify_message"); // unregister default message
+		elgg_unregister_plugin_hook_handler("notify:annotation:message", "group_topic_post", "discussion_create_reply_notification"); // unregister default message
+		elgg_register_plugin_hook_handler("notify:entity:message", "object", "elgg_modifications_groupforumtopic_notify_message"); // register new message
+		elgg_register_plugin_hook_handler("notify:annotation:message", "group_topic_post", "elgg_modifications_groupforumtopic_reply_message"); // register new message
 		
 		// allow tidypics widgets on group and index page
 		elgg_register_widget_type('album_view', elgg_echo("tidypics:widget:albums"), elgg_echo("tidypics:widget:album_descr"), 'profile,index,groups');
