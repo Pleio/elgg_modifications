@@ -1,5 +1,5 @@
 = Version History =
-x.x:
+2.1.1 (2013-05-06):
 - fixed: PHP errors on old function for videolist dimensions
 - fixed: PHP error in pages history annotation
 - fixed: invalid function call in Tidypics ablum view
