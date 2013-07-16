@@ -1,5 +1,11 @@
 = Version History =
+
+x.x:
+
+- changed: activity filter menu now remembers the (sub)type filter
+
 2.1.1 (2013-05-06):
+
 - fixed: PHP errors on old function for videolist dimensions
 - fixed: PHP error in pages history annotation
 - fixed: invalid function call in Tidypics ablum view
@@ -7,6 +13,7 @@
 - fixed: custom message for group forum discussions reply
 
 2.1 (2013-04-05):
+
 - changed: made compatible with Elgg 1.8.14
 
 2.0 (2012-07-12):

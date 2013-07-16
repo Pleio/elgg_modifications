@@ -191,3 +191,35 @@
 		return null;
 	}
 	
+	function elgg_modifications_prepare_menu_filter_hook($hook, $entity_type, $returnvalue, $params){
+		$result = $returnvalue;
+	
+		if (elgg_in_context("activity") && !empty($result) && is_array($result)) {
+			$postfix = array();
+			
+			if ($type = get_input("type")) {
+				$postfix["type"] = $type;
+			}
+			
+			if ($subtype = get_input("subtype")) {
+				$postfix["subtype"] = $subtype;
+			}
+			
+			if (!empty($postfix)) {
+				// go through all the menu sections
+				foreach ($result as $section => $menu_items) {
+					
+					if (!empty($menu_items) && is_array($menu_items)) {
+						// go through all the menu items
+						foreach ($menu_items as $idex => $menu_item) {
+							// add filter elements to the URL
+							$menu_item->setHref(elgg_http_add_url_query_elements($menu_item->getHref(), $postfix));
+						}
+					}
+				}
+			}
+		}
+	
+		return $result;
+	}
+	
