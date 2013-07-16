@@ -214,6 +214,11 @@
 						foreach ($menu_items as $idex => $menu_item) {
 							// add filter elements to the URL
 							$menu_item->setHref(elgg_http_add_url_query_elements($menu_item->getHref(), $postfix));
+							
+							// make sure the correct menu_item is selected
+							if ($menu_item->getHref() == current_page_url()) {
+								$menu_item->setSelected();
+							}
 						}
 					}
 				}
