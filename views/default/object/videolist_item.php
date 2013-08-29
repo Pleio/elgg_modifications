@@ -92,7 +92,7 @@ if ($full && !elgg_in_context('gallery')) {
 	echo elgg_view('object/elements/full', array(
 			'summary' => $list_body,
 			'icon' => $owner_icon,
-			'body' => $content,
+			'body' => $content . $body,
 	));
 } elseif (elgg_in_context('gallery')) {
 	echo '<div class="videolist-gallery-item">';
