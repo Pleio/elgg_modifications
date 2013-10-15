@@ -1,5 +1,6 @@
 <?php
 
+	require_once(dirname(__FILE__) . "/lib/events.php");
 	require_once(dirname(__FILE__) . "/lib/hooks.php");
 	require_once(dirname(__FILE__) . "/lib/page_handlers.php");
 
@@ -84,6 +85,9 @@
 	elgg_register_event_handler("init", "system", "elgg_modifications_init");
 	elgg_register_event_handler("init", "system", "elgg_modifications_init_extend_widgets", 99999);
 	elgg_register_event_handler("pagesetup", "system", "elgg_modifications_pagesetup");
+
+	// register other events
+	elgg_register_event_handler("create", "user", "elgg_modifications_create_user_event_handler");
 	
 	// register plugin hooks
 	elgg_register_plugin_hook_handler("reportedcontent:add", "system", "elgg_modifications_reportedcontent_hook");
