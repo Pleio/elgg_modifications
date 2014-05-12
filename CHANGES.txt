@@ -3,6 +3,7 @@
 x.x:
 
 - changed: activity filter menu now remembers the (sub)type filter
+- changed: notifications personal and group settings bundled
 - removed: tidypics album view, is already in the pleio branch of TidyPics
 
 2.1.1 (2013-05-06):

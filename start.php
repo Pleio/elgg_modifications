@@ -1,5 +1,6 @@
 <?php
 
+	require_once(dirname(__FILE__) . "/lib/functions.php");
 	require_once(dirname(__FILE__) . "/lib/events.php");
 	require_once(dirname(__FILE__) . "/lib/hooks.php");
 	require_once(dirname(__FILE__) . "/lib/page_handlers.php");
@@ -24,6 +25,8 @@
 		elgg_register_plugin_hook_handler("notify:annotation:message", "group_topic_post", "elgg_modifications_groupforumtopic_reply_message"); // register new message
 		
 		elgg_register_plugin_hook_handler("prepare", "menu:filter", "elgg_modifications_prepare_menu_filter_hook");
+		
+		elgg_register_plugin_hook_handler("route", "notifications", "elgg_modifications_route_notifications_hook");
 		
 		// allow tidypics widgets on group and index page
 		elgg_register_widget_type('album_view', elgg_echo("tidypics:widget:albums"), elgg_echo("tidypics:widget:album_descr"), 'profile,index,groups');

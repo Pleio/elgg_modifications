@@ -228,3 +228,37 @@
 		return $result;
 	}
 	
+	function elgg_modifications_route_notifications_hook($hook, $entity_type, $returnvalue, $params) {
+	
+		if (empty($returnvalue) || !is_array($returnvalue)) {
+			return $returnvalue;
+		}
+	
+		gatekeeper();
+	
+		$page = elgg_extract("segments", $returnvalue);
+		$username = "";
+		$segment = "";
+		switch ($page[0]) {
+			case "group":
+				$segment = $page[0];
+			case "personal":
+	
+				if (isset($page[1])) {
+					$username = $page[1];
+				} else {
+					$username = elgg_get_logged_in_user_entity()->username;
+				}
+	
+				forward("notifications/" . $username . "#" . $segment);
+				break;
+			default:
+				set_input("username", $page[0]);
+	
+				include(dirname(dirname(__FILE__)) . "/pages/notifications/owner.php");
+				return false;
+				break;
+		}
+	
+	}
+	
