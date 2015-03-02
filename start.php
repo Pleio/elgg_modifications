@@ -40,7 +40,6 @@
 	function elgg_modifications_init_extend_widgets(){
 		global $CONFIG;
 		
-		$allowed_group_widgets = array("videolist");
 		$allowed_index_widgets = array();
 		
 		if(isset($CONFIG->widgets) && is_array($CONFIG->widgets->handlers)){
