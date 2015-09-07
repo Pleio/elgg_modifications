@@ -9,12 +9,18 @@
 	<bugtracker>https://github.com/Pleio/elgg_modifications/issues</bugtracker>
 	<copyright>(C) ColdTrick IT Solutions 2012 - 2013</copyright>
 	<license>GNU General Public License version 2</license>
-	
+
 	<requires>
 		<type>elgg_release</type>
 		<version>1.8.14</version>
 	</requires>
-	
+
+	<requires>
+		<type>priority</type>
+		<plugin>embed</plugin>
+		<priority>after</priority>
+	</requires>
+
 	<category>ColdTrick</category>
 	<category>Pleio</category>
 </plugin_manifest>
