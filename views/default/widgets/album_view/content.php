@@ -14,7 +14,7 @@ $options = array(
 	'pagination' => false,
 );
 
-if(!elgg_in_context("index")){
+if(elgg_in_context("groups")){
 	$options['container_guid'] = elgg_get_page_owner_guid();
 }
 
