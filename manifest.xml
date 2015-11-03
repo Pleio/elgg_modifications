@@ -20,6 +20,12 @@
 		<plugin>embed</plugin>
 		<priority>after</priority>
 	</requires>
+	
+	<requires>
+		<type>priority</type>
+		<plugin>wizard</plugin>
+		<priority>after</priority>
+	</requires>
 
 	<category>ColdTrick</category>
 	<category>Pleio</category>
