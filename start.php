@@ -8,31 +8,29 @@
 	function elgg_modifications_init(){
 		// extend css
 		elgg_extend_view("css/elgg", "elgg_modifications/css/site");
-		
-		// prepend / extend views
+		elgg_extend_view("page/elements/head", "elgg_modifications/extends/head", 400);
 		elgg_extend_view("forms/uservalidationbyemail/bulk_action", "elgg_modifications/extends/uservalidationbyemail/bulk_action", 499);
 
-		// register page handler
 		elgg_register_page_handler("accept_terms", "elgg_modifications_accept_terms_page_handler");
 		elgg_register_page_handler("generate_digischool_menu", "elgg_modifications_generate_digischool_menu_page_handler");
-		
+
 		elgg_register_widget_type("pdokkaart", elgg_echo("widgets:pdokkaart:title"),  elgg_echo("widgets:pdokkaart:description") ,"index,groups,profile,dashboard", true);
-		
+
 		elgg_unregister_plugin_hook_handler("object:notifications", "object", "group_object_notifications_intercept"); // disable intercept
 		elgg_unregister_plugin_hook_handler("notify:entity:message", "object", "groupforumtopic_notify_message"); // unregister default message
 		elgg_unregister_plugin_hook_handler("notify:annotation:message", "group_topic_post", "discussion_create_reply_notification"); // unregister default message
 		elgg_register_plugin_hook_handler("notify:entity:message", "object", "elgg_modifications_groupforumtopic_notify_message"); // register new message
 		elgg_register_plugin_hook_handler("notify:annotation:message", "group_topic_post", "elgg_modifications_groupforumtopic_reply_message"); // register new message
-		
+
 		elgg_register_plugin_hook_handler("prepare", "menu:filter", "elgg_modifications_prepare_menu_filter_hook");
-		
+
 		elgg_register_plugin_hook_handler("route", "notifications", "elgg_modifications_route_notifications_hook");
-		
+
 		// allow tidypics widgets on group and index page
 		elgg_register_widget_type('album_view', elgg_echo("tidypics:widget:albums"), elgg_echo("tidypics:widget:album_descr"), 'profile,index,groups');
 		elgg_register_widget_type('latest_photos', elgg_echo("tidypics:widget:latest"), elgg_echo("tidypics:widget:latest_descr"), 'profile,index,groups');
 	}
-	
+
 	/**
 	 * Extend the registered widgets to more contexts
 	 *
