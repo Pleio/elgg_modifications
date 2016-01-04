@@ -14,6 +14,9 @@
 		elgg_register_page_handler("accept_terms", "elgg_modifications_accept_terms_page_handler");
 		elgg_register_page_handler("generate_digischool_menu", "elgg_modifications_generate_digischool_menu_page_handler");
 
+		elgg_register_page_handler("sitemap.xml", "elgg_modifications_sitemap_page_handler");
+		elgg_register_page_handler("robots.txt", "elgg_modifications_robots_page_handler");
+
 		elgg_register_widget_type("pdokkaart", elgg_echo("widgets:pdokkaart:title"),  elgg_echo("widgets:pdokkaart:description") ,"index,groups,profile,dashboard", true);
 
 		elgg_unregister_plugin_hook_handler("object:notifications", "object", "group_object_notifications_intercept"); // disable intercept
@@ -37,11 +40,11 @@
 	 */
 	function elgg_modifications_init_extend_widgets(){
 		global $CONFIG;
-		
+
 		$allowed_index_widgets = array();
-		
+
 		if(isset($CONFIG->widgets) && is_array($CONFIG->widgets->handlers)){
-			
+
 			// add group context to widgets
 			if(!empty($allowed_group_widgets)){
 				foreach($allowed_group_widgets as $widget_handler){
@@ -50,7 +53,7 @@
 					}
 				}
 			}
-			
+
 			// add index context to widgets
 			if(!empty($allowed_index_widgets)){
 				foreach($allowed_index_widgets as $widget_handler){
@@ -61,10 +64,10 @@
 			}
 		}
 	}
-	
+
 	function elgg_modifications_pagesetup(){
 		$user = elgg_get_logged_in_user_entity();
-		
+
 		// check for terms
 		if(!empty($user) && !elgg_in_context("accept_terms") && !elgg_get_site_entity()->isPublicPage()){
 			// do we need to check
@@ -80,7 +83,7 @@
 			}
 		}
 	}
-	
+
 	// register default Elgg events
 	elgg_register_event_handler("init", "system", "elgg_modifications_init");
 	elgg_register_event_handler("init", "system", "elgg_modifications_init_extend_widgets", 99999);
@@ -88,12 +91,12 @@
 
 	// register other events
 	elgg_register_event_handler("create", "user", "elgg_modifications_create_user_event_handler");
-	
+
 	// register plugin hooks
 	elgg_register_plugin_hook_handler("reportedcontent:add", "system", "elgg_modifications_reportedcontent_hook");
 	elgg_register_plugin_hook_handler("gatekeeper", "group", "elgg_modifications_group_gatekeeper_hook");
 	elgg_register_plugin_hook_handler("widget_url", "widget_manager", "elgg_modifications_widgets_url_hook");
-	
+
 	// register actions
 	elgg_register_action("accept_terms/accept", dirname(__FILE__) . "/actions/accept_terms/accept.php");
 	elgg_register_action("accept_terms/deactivate", dirname(__FILE__) . "/actions/accept_terms/deactivate.php");

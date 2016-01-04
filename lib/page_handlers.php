@@ -1,17 +1,27 @@
-<?php 
+<?php
 
 	function elgg_modifications_accept_terms_page_handler($page){
-		
+
 		switch($page[0]){
 			case "deactivate":
 				set_input("accept_terms_deactivate", true);
 				break;
 		}
-		
+
 		include(dirname(dirname(__FILE__)) . "/pages/accept_terms.php");
 		return true;
 	}
-	
+
+	function elgg_modifications_sitemap_page_handler($page) {
+		include(dirname(__FILE__) . "/../pages/sitemap.php");
+		return true;
+	}
+
+	function elgg_modifications_robots_page_handler($page) {
+		include(dirname(__FILE__) . "/../pages/robots.php");
+		return true;
+	}
+
 	function elgg_modifications_generate_digischool_menu_page_handler($page){
 		admin_gatekeeper();
 		if(elgg_is_active_plugin("menu_builder")){
@@ -21,7 +31,7 @@
 				"subtype" => "menu_builder_menu_item",
 				"limit" => false
 			);
-			
+
 			if($current_items = elgg_get_entities($current_options)){
 				foreach($current_items as $current_item){
 					$current_item->delete();
@@ -29,12 +39,12 @@
 			}
 // 			var_dump($current_items);
 // 			exit();
-			
-			
+
+
 			// add the new ones
 			$site = elgg_get_site_entity();
 			$site_acl = $site->getACL();
-			
+
 			$menu_items = array(
 				array(
 					"title" => "Voorpagina",
@@ -63,7 +73,7 @@
 					"url" => "Zelf in te vullen",
 					"access_id" => ACCESS_PUBLIC
 				),
-			
+
 				array(
 					"title" => "Leermiddelen",
 					"url" => "#",
@@ -100,7 +110,7 @@
 							"title" => "Mijn profielpagina",
 							"url" => "[wwwroot]profile/[username]",
 							"access_id" => $site_acl
-						),					
+						),
 						array(
 							"title" => "Alle groepen",
 							"url" => "[wwwroot]groups/all/?filter=pop",
@@ -183,16 +193,16 @@
 				$item->owner_guid = $site->getGUID();
 				$item->container_guid = $site->getGUID();
 				$item->site_guid = $site->getGUID();
-	
+
 				$item->access_id = $main_item["access_id"];
 				$item->parent_guid = 0;
 				$item->title = $main_item["title"];
 				$item->url = $main_item["url"];
 				$item->order = $i;
 				$i++;
-	
+
 				$item->save();
-	
+
 				if(array_key_exists("children", $main_item)){
 					foreach($main_item["children"] as $sub_item){
 						$submenu_item = new ElggObject();
@@ -201,7 +211,7 @@
 						$submenu_item->container_guid = $site->getGUID();
 						$submenu_item->site_guid = $site->getGUID();
 						$submenu_item->access_id = $sub_item["access_id"];
-	
+
 						$submenu_item->parent_guid = $item->getGUID();
 						$submenu_item->title = $sub_item["title"];
 						$submenu_item->url = $sub_item["url"];
@@ -211,9 +221,9 @@
 					}
 				}
 			}
-			
+
 			system_message("menu created");
-			
+
 		} else {
 			register_error("plugin menu_builder not activated");
 		}
