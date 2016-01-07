@@ -1,4 +1,9 @@
 <?php
+if(subsite_manager_on_subsite() && !$indexingEnabled) {
+    http_response_code(404);
+    exit();
+}
+
 header('Content-type: text/xml');
 
 $base = elgg_get_site_url();
