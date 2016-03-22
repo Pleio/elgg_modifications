@@ -27,6 +27,12 @@
 		<priority>after</priority>
 	</requires>
 
+    <requires>
+		<type>priority</type>
+		<plugin>html_email_handler</plugin>
+		<priority>after</priority>
+	</requires>
+
 	<category>ColdTrick</category>
 	<category>Pleio</category>
 </plugin_manifest>
