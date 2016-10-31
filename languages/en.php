@@ -2,8 +2,9 @@
 
 	$english = array(
 		// Accept terms
+		'elgg_modifications:accept_terms' => 'Ask user to accept general terms?',
 		'elgg_modifications:accept_terms:title' => "Terms and conditions of Pleio",
-		
+
 		// reported content to mail
 		'elgg_modifications:usersettings:reportedcontent:notify:description' => "I wish to be notified when somebody submits a report about inappropriate content",
 		'elgg_modifications:usersettings:reportedcontent:notify:subject' => "A new item was reported",

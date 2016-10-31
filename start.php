@@ -68,19 +68,34 @@
 	function elgg_modifications_pagesetup(){
 		$user = elgg_get_logged_in_user_entity();
 
-		// check for terms
-		if(!empty($user) && !elgg_in_context("accept_terms") && !elgg_get_site_entity()->isPublicPage()){
-			// do we need to check
-			if(empty($_SESSION["terms_accepted"])){
-				$user_ts = $user->getPrivateSetting("general_terms_accepted");
-				if(empty($user_ts)){
-					$_SESSION["terms_forward_from"] = current_page_url();
-					forward("accept_terms");
-				} else {
-					// user has accepted the terms, so don't check again
-					$_SESSION["terms_accepted"] = $user_ts;
-				}
-			}
+		if (!$user) {
+			return;
+		}
+
+		if (elgg_in_context("accept_terms")) {
+			return;
+		}
+
+		$site = elgg_get_site_entity();
+		if ($site->isPublicPage()) {
+			return;
+		}
+
+		if (!empty($_SESSION["terms_accepted"])) {
+			return;
+		}
+
+		if (elgg_get_plugin_setting("accept_terms", "elgg_modifications") === "no") {
+			return;
+		}
+
+		$user_ts = $user->getPrivateSetting("general_terms_accepted");
+		if (empty($user_ts)) {
+			$_SESSION["terms_forward_from"] = current_page_url();
+			forward("accept_terms");
+		} else {
+			// user has accepted the terms, so don't check again
+			$_SESSION["terms_accepted"] = $user_ts;
 		}
 	}
 

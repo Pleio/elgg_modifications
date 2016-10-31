@@ -1,6 +1,7 @@
 <?php 
 
 	$dutch = array(
+		'elgg_modifications:accept_terms' => 'Vraag gebruiker om algemene voorwaarden te accepteren?',
 		'elgg_modifications:groups:notification:create' =>
 		'%s startte de discussie \'%s\' in de groep %s:
 %s
