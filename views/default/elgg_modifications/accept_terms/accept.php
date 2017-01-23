@@ -2,7 +2,7 @@
 if(get_language() == "nl"){
 ?>
 <div>
-	<img class='float-alt' src='<?php echo $vars["url"]; ?>mod/theme_pleio/_graphics/logo_normal.png' />
+	<img class='float-alt' src='<?php echo $vars["url"]; ?>mod/pleio_main_template/_graphics/logo_normal.png' />
 	<p>
 		<i>
 		Je krijgt dit bericht omdat je lid bent van Pleio en/of een website die gebruik maakt van Pleio als onderliggend
@@ -85,7 +85,7 @@ if(get_language() == "nl"){
 </div>
 <?php } else { ?>
 <div>
-	<img class='float-alt' src='<?php echo $vars["url"]; ?>mod/theme_pleio/_graphics/logo_normal.png' />
+	<img class='float-alt' src='<?php echo $vars["url"]; ?>mod/pleio_main_template/_graphics/logo_normal.png' />
 	<p>
 		<i>
 		You receive this message because you are a member of Pleio and/or a website that is based on Pleio.
